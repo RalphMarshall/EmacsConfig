@@ -1,4 +1,4 @@
- ;;; emacs --- Summary
+;;; emacs --- Summary
 ;;; Commentary:
 
 ;;; Code:
@@ -29,61 +29,17 @@
   :ensure t)
 
 (column-number-mode)
-;;(global-display-line-numbers-mode t)
+(global-display-line-numbers-mode t)
 
 ;; Some modes don't need line numbers
 (dolist (mode '(term-mode-hook eshell-mode-hook))
   (add-hook mode (lambda() (display-line-numbers-mode 0))))
 
 ;;; ****************************************************************
-;;; The AI is coming to take our jobs
-;;; ****************************************************************
-
-;; (defvar bootstrap-version)
-;; (let ((bootstrap-file
-;;        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-;;       (bootstrap-version 6))
-;;   (unless (file-exists-p bootstrap-file)
-;;     (with-current-buffer
-;;         (url-retrieve-synchronously
-;;          "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
-;;          'silent 'inhibit-cookies)
-;;       (goto-char (point-max))
-;;       (eval-print-last-sexp)))
-;;   (load bootstrap-file nil 'nomessage))
-
-;; (straight-use-package
-;;  '(copilot :host github :repo "zerolfx/copilot" :files ("dist" "*.el")))
-
-;; 'copilot
-;;   (:host github :repo "zerolfx/copilot.el" :files ("dist" "*.el"))
-;;   :ensure t)
-
-;; (add-hook 'prog-mode-hook 'copilot-mode)
-
-;;; ****************************************************************
-;;; Programming font - hat-tip to @Graham Trogdon!
+;;; Programming font - hat-tip to Graham
 ;;; ****************************************************************
 
 (set-face-attribute 'default nil :font "Fira Code" :height 150)
-
-;; (use-package ligature
-;;   :ensure t)
-
-;; ;; WWW ligature everywhere all the time
-;; (ligature-set-ligatures 't '("www"))
-
-;; ;; Enable ligatures in programming modes (see github.com/tonsky/FiraCode/wiki/Emacs-instructions)
-;; (ligature-set-ligatures 'prog-mode '("www" "**" "***" "**/" "*/" "\\\\"
-;;									 "!!" "!=" "!==" "----" "-->" "->"
-;;									 "##" "###" "####"
-;;									 "..." "?=" "??" ";;" "/*" "/**"
-;;									 "/=" "/==" "/>" "//" "///" "&&" "||"
-;;									 "++" "==" "===" "==>" "=>" "<="
-;;									 ">="
-;;									 "<!--" "<-" "<--" "<->"
-;;									 "<=" "<==" "<=>" "%%"))
-;; (global-ligature-mode 't)
 
 ;;Figure out how to use dired with the assistance of the "discover" package
 (use-package discover
@@ -132,7 +88,6 @@
 
 ;;; Random stuff that doesn't fit anywhere else
 (put 'upcase-region 'disabled nil)
-(global-set-key (kbd "C-x C-g") 'goto-line)
 (global-set-key (kbd "C-x x") 'next-error)
 (global-set-key (kbd "C-;") 'comment-region)
 (global-set-key (kbd "C-x j") 'join-line)
@@ -153,42 +108,10 @@
 	)
   )
 
-;(defun make-accessors (type rawProp)
-;  "Create a get/set pair of accessors."
-;  (interactive "sType: \nsProperty: ")
-;  (let ((prop (capitalize rawProp)))
-;	(insert (mapconcat
-;			 'identity
-;			 (list
-;				"/**"
-;				(concat "* " rawProp)
-;				(concat "* @type {" type "}")
-;				"* @public"
-;				"*/"
-;				(concat "get " rawProp "() {")
-;				(concat "return this._" rawProp ";")
-;				"}"
-;				""
-;				(concat "set " rawProp "(new" prop ") {")
-;				"const isValid = (candidate) => {"
-;				"return false;"
-;				"};"
-;				(concat "if (assert.ok(isValid(new" prop"), '" rawProp " is invalid')) {")
-;				(concat "this._" rawProp "= new" prop ";")
-;				"}"
-;				"}") "\n"
-;				)
-;			)
-;	)
-;  )
-;
 ;;; ****************************************************************
 ;;; File cache
 ;;; ****************************************************************
 ;
-;(defconst a11yCat-root "~/A11Y/a11ycat")
-;(defconst special-root "~/A11Y/special-projects/design/graiai/api")
-
 (defconst sga-root "~/A11Y/sga/")
 (defconst graiai-root "~/A11Y/graiai/titan/")
 (defconst graiai-proj (concat graiai-root "libs/graiai"))
@@ -214,17 +137,17 @@
  (list (concat path "/src") (concat path "/test")))
 
 (defconst sga-dirs (concat sga-root "tests")
-  "Directories with source for the SAS Graphics Accelerator project")
+  "Directories with source for the SAS Graphics Accelerator project.")
 
 (defconst graiai-dirs
   (mapcar #'add-src-and-test
 		  (list graiai-proj graiai-i18n-proj perseus-proj))
-  "Directories with source for Graiai and Perseus")
+  "Directories with source for Graiai and Perseus.")
 
 (defconst hatchet-dirs
   (mapcar #'add-src-and-test
 		  (list hatchet-commons hatchet-chrome))
-  "Directories with source for the various flavors of Hatchet")
+  "Directories with source for the various flavors of Hatchet.")
 
 (defconst vpat-manager-dirs
    (list (concat vpat-manager "config")
@@ -238,12 +161,12 @@
 		 (concat vpat-manager "templates")
 		 (concat vpat-manager "test")
 		 (concat vpat-manager "validation"))
-   "Directories with source for VPAT Manager")
+   "Directories with source for VPAT Manager.")
 
 (defconst interesting-dirs
   (flatten-list
    (list vpat-manager-dirs graiai-dirs))
-  "All source directories scanned by the filecache code")
+  "All source directories scanned by the filecache code.")
 
 (require 'time-stamp)
 
@@ -289,7 +212,7 @@
  (c-basic-offset 4)
  (tab-width 4)
  (standard-indent 4)
-;; (whitespace-action '(auto-cleanup))
+ (whitespace-action '(auto-cleanup))
  (whitespace-linecolumn 132)
  (whitespace-style
   '(face empty newline newline-mark space-after-tab space-before-tab trailing))
@@ -306,13 +229,7 @@
 ;;; ****************************************************************
 ;;; Javascript editing
 ;;; ****************************************************************
-;
-;(fset 'no-jsdoc
-;   [?\C-o tab ?/ ?/ ?  ?e ?s ?l ?i ?n ?t ?- ?d ?i ?s ?a ?b ?l ?e ?- ?n ?e ?x ?t ?- ?l ?i ?n ?e ?  ?j ?s ?d ?o ?c ?/ ?r ?e ?q ?u ?i ?r ?e ?- ?j ?s ?d ?o ?c])
-;
-;(fset 'allow-literal-string
-;   [?\C-a ?\C-o tab ?/ ?/ ?  ?e ?s ?l ?i ?n ?t ?- ?d ?i ?s ?a ?b ?l ?e ?- ?n ?e ?x ?t ?- ?l ?i ?n ?e ?  ?i ?1 ?8 ?n ?e ?x ?t ?/ ?n ?o ?- ?l ?i ?t ?e ?r ?a ?l ?- ?s ?t ?r ?i ?n ?g ?\C-n ?\C-n])
-;
+
 (use-package typescript-mode
  :ensure t
  :mode "\\.tsx?\\'"
@@ -348,15 +265,9 @@
 					 ))))
 
 ;;; ****************************************************************
-;;; Robot
-;;; ****************************************************************
-;(load-file "~/.emacs.d/robot-mode.el")
-;(add-to-list 'auto-mode-alist '("\\.robot\\'" . robot-mode))
-;
-;;; ****************************************************************
 ;;; HTML and CSS
 ;;; ****************************************************************
-;
+
 (use-package css-mode
  :ensure t
  :mode "\\.less\\'"
@@ -398,10 +309,10 @@
 ;;; ****************************************************************
 ;;; Flycheck and lint
 ;;; ****************************************************************
-;
+
 ;;; Needed to convince flycheck not to complain about its own functions in this file...
 (declare-function flycheck-add-mode "flycheck" (checker mode))
-;
+
 ;;; Typescript setup
 (use-package tide :ensure t)
 
@@ -484,23 +395,7 @@
 (flycheck-add-mode 'typescript-tslint 'web-mode)
 ;
 ;;; End of Typescript setup
-;
-;(custom-set-variables
-; ;; custom-set-variables was added by Custom.
-; ;; If you edit it by hand, you could mess it up, so be careful.
-; ;; Your init file should contain only one such instance.
-; ;; If there is more than one, they won't work right.
-; '(flycheck-javascript-eslint-executable "/usr/local/bin/eslint")
-; '(indent-tabs-mode t nil nil "Customized with use-package whitespace")
-; '(js2-global-externs '("jQuery" "sas" "sap" "QUnit" "assert"))
-; '(js2-ignored-warnings (list "msg.no.side.effects"))
-; '(package-selected-packages
-;   '(edit-indirect prettier robot-mode robots-txt-mode prettier-js yaml-mode xref-js2 xml-rpc ws-butler web-mode use-package tide skewer-mode mediawiki markdown-mode json-mode js2-refactor groovy-mode gradle-mode flycheck-pos-tip flycheck-color-mode-line expand-region exec-path-from-shell eslint-fix editorconfig discover-my-major company auto-package-update auto-complete))
-; '(flycheck-color-mode-line-error-face ((t (:inherit flycheck-fringe-error :background "red" :foreground "black" :weight normal))))
-; '(flycheck-color-mode-line-warning-face ((t (:inherit flycheck-fringe-warning :background "orange" :foreground "black" :weight normal))))
-;
-;
-;
+
 (use-package prettier :ensure t)
 (add-hook 'after-init-hook #'global-prettier-mode)
 
@@ -552,9 +447,6 @@
 	  )))
 
 (global-set-key (kbd "C-c c") 'delete-to-next-uppercase)
-
-;; Pick a font size I can actually read.
-
 
 ;;; ****************************************************************
 ;;; MCP: End of Line
